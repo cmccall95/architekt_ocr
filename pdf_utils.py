@@ -7,33 +7,30 @@ import mimetypes
 import numpy as np
 
 
-def extract_pdf(pdf_file: str, limit: int):
-    if not os.path.exists(pdf_file):
-        raise "Provided file %s does not exist" % pdf_file
+def extract_pdf(path: str, f: int, t: int, out: str):
+    if not os.path.exists(path):
+        raise "Provided file %s does not exist" % path
 
-    if not mimetypes.guess_type(pdf_file)[0] == "application/pdf":
-        raise "Provided file %s is not a valid PDF" % pdf_file
+    if not mimetypes.guess_type(path)[0] == "application/pdf":
+        raise "Provided file %s is not a valid PDF" % path
 
-    document = fitz.open(pdf_file)
-    dir_name = os.path.basename(pdf_file).split('.')[0]
+    document = fitz.open(path)
 
-    if not os.path.exists(dir_name):
-        os.mkdir(dir_name)
+    if not os.path.exists(out):
+        os.mkdir(out)
 
-    i = 0
-    for page in document:
-        if i == limit:
-            break
+    for i in range(f, t):
+        page = document.load_page(i)
+
         table = crop_required_portions(
             _pixmap_to_numpy(page.get_pixmap(matrix=fitz.Matrix(3, 3)))
         )
 
         if table is not None:
-            cv2.imwrite(dir_name + "/" + str(i) + "_0.png", table[0])
-            cv2.imwrite(dir_name + "/" + str(i) + "_1.png", table[1])
+            cv2.imwrite(out + "/" + str(i) + "_0.png", table[0])
+            cv2.imwrite(out + "/" + str(i) + "_1.png", table[1])
 
         print(str(i) + "  Done")
-        i += 1
 
 
 def crop_required_portions(img):
@@ -99,10 +96,10 @@ def _find_contours(_thresh, _size):
 
 
 def main():
-    if len(sys.argv) < 3:
+    if len(sys.argv) < 5:
         raise "No enough arguments, Provide filename and limit of pages"
 
-    extract_pdf(sys.argv[1], int(sys.argv[2]))
+    extract_pdf(sys.argv[1], int(sys.argv[2]), int(sys.argv[3]), sys.argv[4])
 
 
 if __name__ == "__main__":
