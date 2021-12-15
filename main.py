@@ -5,12 +5,15 @@ import parsers.jacobs_table as jacob
 
 
 def main():
-    if len(sys.argv) < 3:
-        raise "Provide at least one input image for OCR"
+    if len(sys.argv) < 1:
+        raise "Not enough arguments"
 
     if sys.argv[1] == '--version':
         print('ARKITEKT_OCR v1.0')
         exit(0)
+
+    if len(sys.argv) < 3:
+        raise "Provide at least one input image for OCR"
 
     output_boxes = ocr.apply_ocr(sys.argv[1])
 

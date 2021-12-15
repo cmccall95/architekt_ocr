@@ -96,12 +96,15 @@ def _find_contours(_thresh, _size):
 
 
 def main():
-    if len(sys.argv) < 5:
-        raise "No enough arguments, Provide filename and limit of pages"
+    if len(sys.argv) < 1:
+        raise "Not enough arguments"
 
     if sys.argv[1] == '--version':
         print('ARKITEKT_PDF_UTIL v1.0')
         exit(0)
+
+    if len(sys.argv) < 5:
+        raise "No enough arguments, Provide filename and limit of pages"
 
     extract_pdf(sys.argv[1], int(sys.argv[2]), int(sys.argv[3]), sys.argv[4])
 
