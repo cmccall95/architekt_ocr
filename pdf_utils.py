@@ -20,7 +20,7 @@ def extract_pdf(path: str, f: int, t: int, out: str):
         os.mkdir(out)
 
     for i in range(f, t):
-        page = document.load_page(i)
+        page = document.load_page(i - 1)
 
         table = crop_required_portions(
             _pixmap_to_numpy(page.get_pixmap(matrix=fitz.Matrix(3, 3)))
