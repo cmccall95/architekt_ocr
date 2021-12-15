@@ -99,6 +99,10 @@ def main():
     if len(sys.argv) < 5:
         raise "No enough arguments, Provide filename and limit of pages"
 
+    if sys.argv[1] == '--version':
+        print('ARKITEKT_PDF_UTIL v1.0')
+        exit(0)
+
     extract_pdf(sys.argv[1], int(sys.argv[2]), int(sys.argv[3]), sys.argv[4])
 
 
