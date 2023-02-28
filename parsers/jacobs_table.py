@@ -4,6 +4,7 @@ def parse_jacobs(table_ocr_data):
 
     now_is_header = False
     current_columns = None
+
     for box in table_ocr_data:
         txt = combine_simple_text(box['text'])
 
@@ -24,6 +25,8 @@ def parse_jacobs(table_ocr_data):
             # This will be a row, but we also need to filter non rows i.e. sub headers etc.
             row_entry = {}
             row = filter_row(box)
+
+            print(row)
 
             # Check if this a New Row, Continuation or an Ignorable Header
             if row[1][0] >= current_columns[0][1] - 5 and row[1][0] + row[2][0] <= current_columns[0][2]:
@@ -65,7 +68,7 @@ def filter_row(box):
     conf = box['conf']
     count = 0
     for i in range(len(conf)):
-        if conf[i] != '-1':
+        if conf[i] != '-1' and conf[i] != -1:
             count = i
             break
 
@@ -82,7 +85,7 @@ def parse_jacobs_columns(box):
 
     j = 0
     for i in range(len(conf)):
-        if conf[i] == '-1':
+        if conf[i] == -1 or conf[i] == '-1':
             continue
 
         if j == 4:
