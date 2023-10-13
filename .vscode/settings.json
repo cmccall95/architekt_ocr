@@ -5,12 +5,17 @@
   "python.formatting.provider": "none",
   "cSpell.words": [
     "ascontiguousarray",
+    "brication",
+    "cnts",
     "dtype",
     "fitz",
+    "fromarray",
     "frombuffer",
     "frombytes",
     "imwrite",
     "mediabox",
+    "nrection",
+    "OTSU",
     "pixmap",
     "pwht",
     "pytesseract"

@@ -33,12 +33,6 @@ def _remove_lines(image):
     
     return image
 
-def _preprocess_image(image): 
-    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-    thresh = cv2.adaptiveThreshold(gray, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, 11, 2)
-    
-    return thresh
-
 def _write_debug_image(image, index):
     directory = "./debug/extracted_pages"
     if not os.path.exists(directory):
@@ -51,7 +45,6 @@ def _extract_page(page: any, debug: bool = False):
     image = _pixmap_to_numpy(imagePixmap)
     
     image = _remove_lines(image)
-    # image = _preprocess_image(image)
     
     if debug:
         _write_debug_image(image, page.number)

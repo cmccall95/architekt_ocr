@@ -1,79 +1,86 @@
 [
   {
-    "columnName": "pipe_spec",
-    "relativeX1": 0.44717887154861946,
-    "relativeX2": 0.4894357743097239,
-    "relativeY1": 0.7208163265306122,
-    "relativeY2": 0.8342857142857143
+    "columnName": "p_and_id",
+    "relativeX1": 0.24434573829531814,
+    "relativeX2": 0.45457382953181275,
+    "relativeY1": 0.8857142857142857,
+    "relativeY2": 0.9020408163265307
   },
   {
-    "columnName": "id",
-    "relativeX1": 0.5290516206482593,
-    "relativeX2": 0.6515966386554621,
-    "relativeY1": 0.6742857142857143,
-    "relativeY2": 0.7224489795918367
+    "columnName": "pipe_spec",
+    "relativeX1": 0.24381752701080434,
+    "relativeX2": 0.3663625450180072,
+    "relativeY1": 0.9004081632653061,
+    "relativeY2": 0.9175510204081633
   },
   {
     "columnName": "drawing",
-    "relativeX1": 0.7672749099639855,
-    "relativeX2": 0.8966866746698678,
-    "relativeY1": 0.7844897959183673,
-    "relativeY2": 0.8342857142857143
-  },
-  {
-    "columnName": "area",
-    "relativeX1": 0.9436974789915966,
-    "relativeX2": 0.9769747899159663,
-    "relativeY1": 0.7828571428571428,
-    "relativeY2": 0.8326530612244898
-  },
-  {
-    "columnName": "sheet",
-    "relativeX1": 0.8951020408163265,
-    "relativeX2": 0.9225690276110443,
-    "relativeY1": 0.7844897959183673,
-    "relativeY2": 0.8326530612244898
-  },
-  {
-    "columnName": "p_and_id",
-    "relativeX1": 0.8708043217286914,
-    "relativeX2": 0.9780312124849939,
-    "relativeY1": 0.7493877551020408,
-    "relativeY2": 0.7861224489795918
+    "relativeX1": 0.8818967587034813,
+    "relativeX2": 0.9738055222088838,
+    "relativeY1": 0.9526530612244898,
+    "relativeY2": 0.9795918367346939
   },
   {
     "columnName": "item",
-    "relativeX1": 0.6505402160864345,
-    "relativeX2": 0.6737815126050419,
-    "relativeY1": 0.054693877551020405,
-    "relativeY2": 0.5061224489795918
-  },
-  {
-    "columnName": "tag",
-    "relativeX1": 0.6716686674669867,
-    "relativeX2": 0.7176230492196878,
-    "relativeY1": 0.054693877551020405,
-    "relativeY2": 0.5053061224489795
-  },
-  {
-    "columnName": "quantity",
-    "relativeX1": 0.717094837935174,
-    "relativeX2": 0.7593517406962784,
-    "relativeY1": 0.054693877551020405,
-    "relativeY2": 0.5061224489795918
-  },
-  {
-    "columnName": "nps",
-    "relativeX1": 0.7572388955582232,
-    "relativeX2": 0.8031932773109243,
-    "relativeY1": 0.053877551020408164,
-    "relativeY2": 0.5036734693877548
+    "relativeX1": 0.7921008403361344,
+    "relativeX2": 0.803721488595438,
+    "relativeY1": 0.02040816326530612,
+    "relativeY2": 0.7673469387755102
   },
   {
     "columnName": "material_description",
     "relativeX1": 0.8010804321728691,
-    "relativeX2": 0.9785594237695078,
-    "relativeY1": 0.053061224489795916,
-    "relativeY2": 0.5053061224489797
+    "relativeX2": 0.9252100840336134,
+    "relativeY1": 0.02040816326530612,
+    "relativeY2": 0.7673469387755102
+  },
+  {
+    "columnName": "nps",
+    "relativeX1": 0.9236254501800719,
+    "relativeX2": 0.950564225690276,
+    "relativeY1": 0.02040816326530612,
+    "relativeY2": 0.7689795918367347
+  },
+  {
+    "columnName": "quantity",
+    "relativeX1": 0.9500360144057622,
+    "relativeX2": 0.985954381752701,
+    "relativeY1": 0.02040816326530612,
+    "relativeY2": 0.769795918367347
+  },
+  {
+    "columnName": "sheet",
+    "relativeX1": 0.9706362545018007,
+    "relativeX2": 0.9870108043217287,
+    "relativeY1": 0.9518367346938775,
+    "relativeY2": 0.9795918367346939
+  },
+  {
+    "columnName": "heat_trace",
+    "relativeX1": 0.364249699879952,
+    "relativeX2": 0.45404561824729855,
+    "relativeY1": 0.9020408163265307,
+    "relativeY2": 0.9183673469387755
+  },
+  {
+    "columnName": "insulation_type",
+    "relativeX1": 0.24381752701080434,
+    "relativeX2": 0.3653061224489796,
+    "relativeY1": 0.9159183673469388,
+    "relativeY2": 0.9330612244897959
+  },
+  {
+    "columnName": "insulation_thickness",
+    "relativeX1": 0.364249699879952,
+    "relativeX2": 0.45404561824729894,
+    "relativeY1": 0.9183673469387755,
+    "relativeY2": 0.9338775510204081
+  },
+  {
+    "columnName": "process_line_list",
+    "relativeX1": 0.24487394957983194,
+    "relativeX2": 0.45668667466986845,
+    "relativeY1": 0.9322448979591836,
+    "relativeY2": 0.9485714285714285
   }
 ]
