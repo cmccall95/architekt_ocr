@@ -21,3 +21,6 @@ class ColumnName(Enum):
     insulation_thickness = 'insulation_thickness'
     process_line_list = 'process_line_list'
     documents = 'documents'
+    pos = 'pos'
+    ident = 'ident'
+    npd = 'npd'
