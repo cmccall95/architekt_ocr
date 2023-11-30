@@ -1,5 +1,3 @@
-
-
 import json
 import sys
 import time
@@ -28,15 +26,17 @@ if len(sys.argv) > 5:
     debug = sys.argv[5] == "debug"
 
 extracted_text = []
-
 start_time = time.time()
 if index is not None:
     image = extract_single_page(pdf_path, index, debug)
-    extracted_text.append(extract_columns_from_page(image, rectangles_path, debug))
+    columns = extract_columns_from_page(image, rectangles_path, debug)
+    extracted_text.extend(columns)
 else:
     images = extract_all_pages(pdf_path, debug)
     for i, image in enumerate(images):
-        extracted_text.append(extract_columns_from_page(image, rectangles_path, debug))
+        columns = extract_columns_from_page(image, rectangles_path, debug)
+        extracted_text.extend(columns)
+        print(f"Page {i + 1} of {len(images)}")
         
 with open(f"{output_dir}/output.json", "w") as json_file:
     json.dump(extracted_text, json_file, indent=4)
