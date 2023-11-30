@@ -31,10 +31,10 @@ def _clean_text(column: ColumnName, text: str):
         pattern = r'\b(pipe|-|spec|speg)\b'
         text = re.sub(pattern, "", text, flags=re.IGNORECASE)
     elif (column == ColumnName.p_and_id):
-        pattern =  r'^P&ID-No:|reference|P&ID'
+        pattern =  r'^P&ID-No:|reference|P&ID|\u2014|_'
         text = re.sub(pattern, "", text, flags=re.IGNORECASE)
     elif (column == ColumnName.item):
-        pattern = r'\b(item|fa|\nfr)\b'
+        pattern = r'\b(item|fa|fr|er)\b'
         text = re.sub(pattern, "", text, flags=re.IGNORECASE)
     elif (column == ColumnName.tag):
         pattern = r'\b(tag)\b'
@@ -52,7 +52,7 @@ def _clean_text(column: ColumnName, text: str):
         pattern = r'\b(heat|trace)\b'
         text = re.sub(pattern, "", text, flags=re.IGNORECASE)
     elif (column == ColumnName.insulation_type):
-        pattern = r'\b(insulation|type)\b'
+        pattern = r'\b(insulation|type)\b|='
         text = re.sub(pattern, "", text, flags=re.IGNORECASE)
     elif (column == ColumnName.insulation_thickness):
         pattern = r'\b(insulation|thickness)\b'
@@ -66,36 +66,67 @@ def _clean_text(column: ColumnName, text: str):
     return re.sub(pattern, '', text).strip()
 
 def _process_bom_table(extracted_data: dict): 
-    item_rows = extracted_data[ColumnName.item.value].split('\n')
-    
-    quantity_rows = extracted_data[ColumnName.quantity.value].split('\n')
-    quantity_rows = [quantity for quantity in quantity_rows if quantity.strip()]
-    
-    nps_rows = extracted_data[ColumnName.nps.value].split('\n')
-    nps_rows = [nps for nps in nps_rows if nps.strip()]
-    
-    pattern = r'(S-STD\n|mm\)\n|in\. Length)'
-    description_rows = re.split(pattern, extracted_data[ColumnName.material_description.value])
-
-    # Combine the removed parts from the split (S-STD\n, mm)\n, in. Length) back into the description.
-    description_rows = [description_rows[i] + (description_rows[i + 1] if i + 1 < len(description_rows) else '') for i in range(0, len(description_rows), 2)]
-    description_rows = [description.replace('\n', '') for description in description_rows] 
-     
-    del extracted_data[ColumnName.item.value]
-    del extracted_data[ColumnName.quantity.value]
-    del extracted_data[ColumnName.nps.value]
-    del extracted_data[ColumnName.material_description.value]
-    
-    data = []
-    for i in range(len(item_rows)):
-        row = {
-            **extracted_data,
-            ColumnName.item.value: item_rows[i],
-            ColumnName.quantity.value:  quantity_rows[i] if i < len(quantity_rows) else "-",
-            ColumnName.nps.value: nps_rows[i] if i < len(nps_rows) else "-",
-            ColumnName.material_description.value: description_rows[i] if i < len(description_rows) else "-"
-        }
+    extracted_mto = {}
         
+    if (ColumnName.item.value  in extracted_data):
+        item_rows = extracted_data[ColumnName.item.value].split('\n')
+        item_rows = [item for item in item_rows if item.strip()]
+        del extracted_data[ColumnName.item.value]
+        
+        extracted_mto[ColumnName.item.value] = item_rows
+        
+    if (ColumnName.pos.value in extracted_data):
+        pos_rows = extracted_data[ColumnName.pos.value].split('\n')
+        pos_rows = [pos for pos in pos_rows if pos.strip()]
+        del extracted_data[ColumnName.pos.value]
+        
+        extracted_mto[ColumnName.pos.value] = pos_rows
+        
+    if (ColumnName.ident.value in extracted_data):
+        ident_rows = extracted_data[ColumnName.ident.value].split('\n')
+        ident_rows = [ident for ident in ident_rows if ident.strip()]
+        del extracted_data[ColumnName.ident.value]
+        
+        extracted_mto[ColumnName.ident.value] = ident_rows
+        
+    if (ColumnName.npd.value in extracted_data):
+        npd_rows = extracted_data[ColumnName.npd.value].split('\n')
+        npd_rows = [npd for npd in npd_rows if npd.strip()]
+        del extracted_data[ColumnName.npd.value]
+        
+        extracted_mto[ColumnName.npd.value] = npd_rows
+        
+    if (ColumnName.quantity.value in extracted_data):
+        quantity_rows = extracted_data[ColumnName.quantity.value].split('\n')
+        quantity_rows = [quantity for quantity in quantity_rows if quantity.strip()]
+        del extracted_data[ColumnName.quantity.value]
+        
+        extracted_mto[ColumnName.quantity.value] = quantity_rows
+    
+    if (ColumnName.nps.value in extracted_data):
+        nps_rows = extracted_data[ColumnName.nps.value].split('\n')
+        nps_rows = [nps for nps in nps_rows if nps.strip()]
+        del extracted_data[ColumnName.nps.value]
+        
+        extracted_mto[ColumnName.nps.value] = nps_rows
+    
+    if (ColumnName.material_description.value in extracted_data):
+        pattern = r'(S-STD\n|mm\)\n|in\. Length)'
+        description_rows = re.split(pattern, extracted_data[ColumnName.material_description.value])
+        del extracted_data[ColumnName.material_description.value]
+        
+        # Combine the removed parts from the split (S-STD\n, mm)\n, in. Length) back into the description.
+        description_rows = [description_rows[i] + (description_rows[i + 1] if i + 1 < len(description_rows) else '') for i in range(0, len(description_rows), 2)]
+        description_rows = [description.replace('\n', '') for description in description_rows] 
+        
+        extracted_mto[ColumnName.material_description.value] = description_rows
+        
+    data = []
+    for i in range(len(list(extracted_mto.values())[0])):
+        row = {**extracted_data}
+        for key in extracted_mto:
+            row[key] = extracted_mto[key][i] if i < len(extracted_mto[key]) else "-"
+       
         data.append(row)
         
     return data
@@ -115,7 +146,7 @@ def _store_cropped_rectangles(image: any, column: str):
     image.save(f"{directory}/{column}.png")
 
 # img: c2 image
-def _extract_text_from_area(img: any, rectangles: List[ExtractAreaRect], debug: bool = False) -> Dict[str, List[str]]:
+def _extract_text_from_area(img: any, rectangles: List[ExtractAreaRect], debug: bool = False):
     extracted_text = {}
     
     img_for_draw = img.copy()
