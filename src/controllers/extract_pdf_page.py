@@ -16,7 +16,7 @@ def _remove_lines(image):
     thresh = cv2.threshold(blackAndWhiteImage, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)[1]
     
     # Remove horizontal lines
-    horizontal_kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (20,1))
+    horizontal_kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (50,1))
     remove_horizontal = cv2.morphologyEx(thresh, cv2.MORPH_OPEN, horizontal_kernel, iterations=2)
     cnts = cv2.findContours(remove_horizontal, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
     cnts = cnts[0] if len(cnts) == 2 else cnts[1]
@@ -24,13 +24,15 @@ def _remove_lines(image):
         cv2.drawContours(image, [c], -1, (255,255,255), override_line_thickness)
         
     # Remove vertical lines
-    vertical_kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (1,20))
+    vertical_kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (1,50))
     remove_vertical = cv2.morphologyEx(thresh, cv2.MORPH_OPEN, vertical_kernel, iterations=2)
     cnts = cv2.findContours(remove_vertical, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
     cnts = cnts[0] if len(cnts) == 2 else cnts[1]
     for c in cnts:
         cv2.drawContours(image, [c], -1, (255,255,255), override_line_thickness)
     
+    # image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    # image = cv2.threshold(image, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)[1]
     return image
 
 def _write_debug_image(image, index):
