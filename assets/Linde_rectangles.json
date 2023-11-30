@@ -1,0 +1,51 @@
+[
+  {
+    "columnName": "drawing",
+    "relativeX1": 0.5282897862232779,
+    "relativeX2": 0.6714707450676233,
+    "relativeY1": 0.7306122448979592,
+    "relativeY2": 0.7714285714285715
+  },
+  {
+    "columnName": "sheet",
+    "relativeX1": 0.8949023219739202,
+    "relativeX2": 0.9192000410615553,
+    "relativeY1": 0.809795918367347,
+    "relativeY2": 0.8530612244897959
+  },
+  {
+    "columnName": "quantity",
+    "relativeX1": 0.9468631538125939,
+    "relativeX2": 0.9859507888666156,
+    "relativeY1": 0.04163265306122449,
+    "relativeY2": 0.5738775510204082
+  },
+  {
+    "columnName": "material_description",
+    "relativeX1": 0.747679965097678,
+    "relativeX2": 0.9485951815405497,
+    "relativeY1": 0.044081632653061226,
+    "relativeY2": 0.5787755102040816
+  },
+  {
+    "columnName": "pos",
+    "relativeX1": 0.6720480876436085,
+    "relativeX2": 0.6905354826015917,
+    "relativeY1": 0.044081632653061226,
+    "relativeY2": 0.5755102040816328
+  },
+  {
+    "columnName": "ident",
+    "relativeX1": 0.6876363371952107,
+    "relativeX2": 0.7182354937224296,
+    "relativeY1": 0.04326530612244898,
+    "relativeY2": 0.5755102040816328
+  },
+  {
+    "columnName": "npd",
+    "relativeX1": 0.7165034659944738,
+    "relativeX2": 0.7481961430653021,
+    "relativeY1": 0.04326530612244898,
+    "relativeY2": 0.5787755102040816
+  }
+]
